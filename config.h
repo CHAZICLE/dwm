@@ -53,20 +53,21 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "terminator", "-e", "tmux-terminal-main", NULL };
-static const char *volume_up[] = {"pulseaudio-ctl", "up", "5"};
-static const char *volume_down[] = {"pulseaudio-ctl", "down", "5"};
-static const char *volume_mute[] = {"pulseaudio-ctl", "mute"};
-static const char *screen_br_up[] = {"sudo", "backlight", "screen", "up"};
-static const char *screen_br_dn[] = {"sudo", "backlight", "screen", "dn"};
-static const char *screen_br_of[] = {"sudo", "backlight", "screen", "off"};
-static const char *screen_br_on[] = {"sudo", "backlight", "screen", "on"};
-static const char *kboard_br_up[] = {"sudo", "backlight", "keyboard", "up"};
-static const char *kboard_br_dn[] = {"sudo", "backlight", "keyboard", "dn"};
-static const char *kboard_br_of[] = {"sudo", "backlight", "keyboard", "off"};
-static const char *kboard_br_on[] = {"sudo", "backlight", "keyboard", "on"};
-static const char *media_prev[] = {"cmus-remote", "--prev"};
-static const char *media_paus[] = {"cmus-remote", "--pause"};
-static const char *media_next[] = {"cmus-remote", "--next"};
+static const char *volume_up[] = {"pulseaudio-ctl", "up", "5", NULL};
+static const char *volume_down[] = {"pulseaudio-ctl", "down", "5", NULL};
+static const char *volume_mute[] = {"pulseaudio-ctl", "mute", NULL};
+static const char *screen_br_up[] = {"sudo", "backlight", "screen", "up", NULL};
+static const char *screen_br_dn[] = {"sudo", "backlight", "screen", "dn", NULL};
+static const char *screen_br_of[] = {"sudo", "backlight", "screen", "off", NULL};
+static const char *screen_br_on[] = {"sudo", "backlight", "screen", "on", NULL};
+static const char *kboard_br_up[] = {"sudo", "backlight", "keyboard", "up", NULL};
+static const char *kboard_br_dn[] = {"sudo", "backlight", "keyboard", "dn", NULL};
+static const char *kboard_br_of[] = {"sudo", "backlight", "keyboard", "off", NULL};
+static const char *kboard_br_on[] = {"sudo", "backlight", "keyboard", "on", NULL};
+static const char *media_prev[] = {"cmus-remote", "--prev", NULL};
+static const char *media_paus[] = {"cmus-remote", "--pause", NULL};
+static const char *media_next[] = {"cmus-remote", "--next", NULL};
+static const char *dpms_screenoff[] = {"bash", "-c", "sleep 1; xset dpms force off", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -111,6 +112,7 @@ static Key keys[] = {
         { 0,              	        XF86XK_AudioPrev,	   spawn,        { .v = media_prev } },
         { 0,              	        XF86XK_AudioPlay,	   spawn,        { .v = media_paus } },
         { 0,              	        XF86XK_AudioNext,	   spawn,        { .v = media_next } },
+        { 0,              	        XF86XK_Sleep,		   spawn,        { .v = dpms_screenoff } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
