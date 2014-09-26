@@ -39,7 +39,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -52,7 +52,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "terminator", "-e", "tmux-terminal-main", NULL };
+static const char *termcmd_new[]  = { "urxvt", "-e", "tmux-terminal-main", "new", NULL };
+static const char *termcmd[]  = { "urxvt", "-e", "tmux-terminal-main", NULL };
 static const char *volume_up[] = {"pulseaudio-ctl", "up", "5", NULL};
 static const char *volume_down[] = {"pulseaudio-ctl", "down", "5", NULL};
 static const char *volume_mute[] = {"pulseaudio-ctl", "mute", NULL};
@@ -72,7 +73,8 @@ static const char *dpms_screenoff[] = {"bash", "-c", "sleep 1; xset dpms force o
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd_new } },
+	{ MODKEY|ShiftMask|ControlMask, XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
